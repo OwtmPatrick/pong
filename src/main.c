@@ -136,13 +136,11 @@ int main() {
         update_ball(&ball_x, &ball_y, &ball_direction_x, &ball_direction_y, &paddle1_y, &paddle2_y,
                     &player1_score, &player2_score);
 
-        if (player1_score >= WINNING_SCORE) {
+        if (player1_score >= WINNING_SCORE || player2_score >= WINNING_SCORE) {
+            int winner = player1_score >= WINNING_SCORE ? 1 : 2;
+
             clear_field(field);
-            printf("Player 1 wins!\n");
-            break;
-        } else if (player2_score >= WINNING_SCORE) {
-            clear_field(field);
-            printf("Player 2 wins!\n");
+            printf("Player %d wins!\n", winner);
             break;
         }
     }
