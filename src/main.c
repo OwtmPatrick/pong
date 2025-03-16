@@ -16,6 +16,20 @@ void clear_field(char field[HEIGHT][WIDTH + 1]) {
     }
 };
 
+void move_paddle(char input, int *paddle1_y, int *paddle2_y) {
+    if (input == 'a' && *paddle1_y > 0) {
+        (*paddle1_y)--;
+    } else if (input == 'z' && *paddle1_y < HEIGHT - PADDLE_SIZE) {
+        (*paddle1_y)++;
+
+    } else if (input == 'k' && *paddle2_y > 0) {
+        (*paddle2_y)--;
+
+    } else if (input == 'm' && *paddle2_y < HEIGHT - PADDLE_SIZE) {
+        (*paddle2_y)++;
+    }
+}
+
 int main() {
     char field[HEIGHT][WIDTH + 1];
     int paddle1_y = HEIGHT / 2 - 1;
@@ -28,6 +42,8 @@ int main() {
     int ball_direction_y = 1;
 
     clear_field(field);
+
+    move_paddle('k', &paddle1_y, &paddle2_y);
 
     return 0;
 }
