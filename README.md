@@ -2,9 +2,7 @@
 
 Simple pong game 
 
-## Manage
+## Description
 
-Paddles moving <code>a</code>, <code>z</code> for player 1
-               <code>k</code>, <code>m</code> for player 2
-
-Game finish when one of players score will reach 21
+Symbolic graphics are used to display graphics, the game is controlled using the keys <code>a</code>, <code>z</code> - for the first player and <code>k</code>, <code>m</code> for the second. Implement a step-by-step version of the game.
+The game ends when any player reaches 21 points.
