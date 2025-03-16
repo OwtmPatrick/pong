@@ -30,6 +30,42 @@ void move_paddle(char input, int *paddle1_y, int *paddle2_y) {
     }
 }
 
+void set_initial_state(int *ball_x, int *ball_y, int *paddle1_y, int *paddle2_y) {
+    *ball_x = WIDTH / 2 - 1;
+    *ball_y = HEIGHT / 2;
+    *paddle1_y = HEIGHT / 2 - 1;
+    *paddle2_y = HEIGHT / 2 - 1;
+}
+
+void update_ball(int *ball_x, int *ball_y, int *ball_direction_x, int *ball_direction_y, int *paddle1_y,
+                 int *paddle2_y, int player1_score, int player2_score) {
+    *ball_x += *ball_direction_x;
+    *ball_y += *ball_direction_y;
+
+    if (*ball_y == 0 || *ball_y == HEIGHT - 1) {
+        *ball_direction_y = -*ball_direction_y;
+    }
+
+    if (*ball_x == PADDLE_OFFSET + 1 && (*ball_y >= *paddle1_y - 1 && *ball_y < *paddle1_y + PADDLE_SIZE)) {
+        *ball_direction_x = 1;
+    }
+
+    if (*ball_x == WIDTH - PADDLE_OFFSET - 1 &&
+        (*ball_y >= *paddle2_y - 1 && *ball_y < *paddle2_y + PADDLE_SIZE)) {
+        *ball_direction_x = -1;
+    }
+
+    if (*ball_x == WIDTH - 1) {
+        player1_score += 1;
+        set_initial_state(ball_x, ball_y, paddle1_y, paddle2_y);
+    }
+
+    if (*ball_x == 0) {
+        player2_score += 1;
+        set_initial_state(ball_x, ball_y, paddle1_y, paddle2_y);
+    }
+}
+
 int main() {
     char field[HEIGHT][WIDTH + 1];
     int paddle1_y = HEIGHT / 2 - 1;
