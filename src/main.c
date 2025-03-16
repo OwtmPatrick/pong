@@ -66,6 +66,54 @@ void update_ball(int *ball_x, int *ball_y, int *ball_direction_x, int *ball_dire
     }
 }
 
+void draw(char field[HEIGHT][WIDTH + 1], int ball_x, int ball_y, int paddle1_y, int paddle2_y,
+          int player1_score, int player2_score) {
+    clear_field(field);
+
+    for (int y = 0; y < HEIGHT; y++) {
+        for (int x = 0; x < WIDTH; x++) {
+            if ((x == 0 || x == WIDTH - 1)) {
+                field[y][x] = '|';
+            }
+
+            if (x == WIDTH / 2 - 1) {
+                field[y][x] = '|';
+            }
+        }
+    }
+
+    field[ball_y][ball_x] = '0';
+
+    for (int i = 0; i < PADDLE_SIZE; i++) {
+        if (paddle1_y + i >= 0 && paddle1_y + i < HEIGHT) {
+            field[paddle1_y + i][10] = '|';
+        }
+        if (paddle2_y + i >= 0 && paddle2_y + i < HEIGHT) {
+            field[paddle2_y + i][WIDTH - 10] = '|';
+        }
+    }
+
+    for (int x = 0; x <= WIDTH; x++) {
+        if (x != 0) {
+            printf("%s", "-");
+        }
+    }
+    printf("%s", "\n");
+
+    for (int y = 0; y < HEIGHT; y++) {
+        printf("%s\n", field[y]);
+    }
+
+    for (int x = 0; x <= WIDTH; x++) {
+        if (x != 0) {
+            printf("%s", "-");
+        }
+    }
+
+    printf("%s", "\n");
+    printf("Player 1: %d Player2: %d", player1_score, player2_score);
+}
+
 int main() {
     char field[HEIGHT][WIDTH + 1];
     int paddle1_y = HEIGHT / 2 - 1;
@@ -80,6 +128,8 @@ int main() {
     clear_field(field);
 
     move_paddle('k', &paddle1_y, &paddle2_y);
+
+    draw(field, ball_x, ball_y, paddle1_y, paddle2_y, player1_score, player2_score);
 
     return 0;
 }
