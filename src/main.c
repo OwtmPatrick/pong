@@ -4,7 +4,7 @@
 #define HEIGHT 25
 #define PADDLE_SIZE 3
 #define BALL_SIZE 1
-#define WINNING_SCORE 1
+#define WINNING_SCORE 21
 #define PADDLE_OFFSET 10
 
 void clear_field(char field[HEIGHT][WIDTH + 1]) {
@@ -137,9 +137,13 @@ int main() {
                     &player1_score, &player2_score);
 
         if (player1_score >= WINNING_SCORE) {
+            clear_field(field);
             printf("Player 1 wins!\n");
+            break;
         } else if (player2_score >= WINNING_SCORE) {
+            clear_field(field);
             printf("Player 2 wins!\n");
+            break;
         }
     }
 
